@@ -1,5 +1,11 @@
 import java.util.Scanner;
 
+/**
+ * @author : JJadeYoon
+ * @date : 2023. 7. 16.
+ * 문제 : A * B
+ * 코멘트 :
+ */
 public class _10998 {
     public static void main(String[] args) {
         int A, B;
