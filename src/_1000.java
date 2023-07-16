@@ -7,18 +7,18 @@ import java.util.Scanner;
  * 코멘트 :
  */
 public class _1000 {
-    public static void main(String[] args) {
-        int A, B;
+        public static void main(String[] args) {
+            int A, B;
 
-        Scanner sc = new Scanner(System.in);
-        do {
-            A = sc.nextInt();
-        } while (A <= 0);
+            Scanner sc = new Scanner(System.in);
+            do {
+                A = sc.nextInt();
+            } while (A <= 0);
 
-        do {
-            B = sc.nextInt();
-        } while (B >= 10);
+            do {
+                B = sc.nextInt();
+            } while (B >= 10);
 
-        System.out.println(A + B);
-    }
+            System.out.println(A + B);
+        }
 }
