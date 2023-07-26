@@ -1,6 +1,14 @@
+package class1;
+
 import java.util.Scanner;
 
-public class _1001 {
+/**
+ * @author : JJadeYoon
+ * @date : 2023. 7. 16.
+ * 문제 : A * B
+ * 코멘트 :
+ */
+public class _10998 {
     public static void main(String[] args) {
         int A, B;
 
@@ -13,6 +21,6 @@ public class _1001 {
             B = sc.nextInt();
         } while (B >= 10);
 
-        System.out.println(A - B);
+        System.out.println(A * B);
     }
 }
