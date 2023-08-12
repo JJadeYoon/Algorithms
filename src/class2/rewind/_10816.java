@@ -1,8 +1,7 @@
 package class2.rewind;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import static java.lang.Integer.*;
@@ -11,7 +10,7 @@ import static java.lang.Integer.*;
  * @author : JJadeYoon
  * @date : 2023. 8.11.
  * 문제 : 숫자 카드 2
- * 코멘트 : 이분탐색을 직접 구현해보자
+ * 코멘트 : HashMap 공부
  */
 public class _10816 {
     public static void main(String[] args) throws IOException {
@@ -19,31 +18,31 @@ public class _10816 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int n = parseInt(br.readLine());
-        ArrayList<Integer> arrayList = new ArrayList<>();
         StringTokenizer stN = new StringTokenizer(br.readLine());
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+
         for (int i = 0; i < n; i++) {
-            arrayList.add(parseInt(stN.nextToken()));
+            int key = parseInt(stN.nextToken());
+            int value = 1;
+            if (hashMap.containsKey(key)) {
+                value = hashMap.get(key) + 1;
+            }
+            hashMap.put(key, value);
         }
-        Collections.sort(arrayList);
 
         int m = parseInt(br.readLine());
         StringTokenizer stM = new StringTokenizer(br.readLine());
-        for (int i = 0; i < m; i++) {
-            int num = 0;
-            int finding = Integer.parseInt(stM.nextToken());
 
-            int index = Collections.binarySearch(arrayList, finding);
-            while (index >= 0) {
-                num++;
-                arrayList.remove(index);
-                Collections.sort(arrayList);
-                index = Collections.binarySearch(arrayList, finding);
-            }
-            bw.write(num + "" + " ");
-        }
         br.close();
+
+        for (int i = 0; i < m; i++) {
+            Integer write = hashMap.get(parseInt(stM.nextToken()));
+            if (write == null) {
+                write = 0;
+            }
+            bw.write(write + "" + " ");
+        }
         bw.write("\n");
         bw.flush();
-        bw.close();
     }
 }
