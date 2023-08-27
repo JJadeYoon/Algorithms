@@ -7,63 +7,51 @@ import java.util.Stack;
  * @author : JJadeYoon
  * @date : 2023. 8. 27.
  * 문제 : 스택 수열
- * 코멘트 : Stack 라이브러리 없이 구현?
+ * 코멘트 : 메모리 초과 고려 (String의 불변성), 문제 조건 생각
  */
 public class _1874 {
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
 
         int n = Integer.parseInt(br.readLine());
-
         int[] arr = new int[n];
-        int bigIndex = 0;
+
         for (int i = 0; i < n; i++) {
-            int input = Integer.parseInt(br.readLine());
-            arr[i] = input;
-            if (input == n) {
-                bigIndex = i;
-            }
+            arr[i] = Integer.parseInt(br.readLine());
         }
         br.close();
 
-        boolean isPossible = true;
-        for (int i = bigIndex + 1; i < n - 1; i++) {
-            if (arr[i] < arr[i + 1]) {
-                isPossible = false;
-                break;
+        boolean isAble = true;
+        int count = 0;
+        int start = 1;
+
+        Stack<Integer> stack = new Stack<>();
+        stack.push(start++);
+        sb.append("+\n");
+
+        while (count < n) {
+            if (!stack.isEmpty() && stack.peek() == arr[count]) {
+                stack.pop();
+                sb.append("-\n");
+                count++;
+            } else {
+                if (start > n) {
+                    isAble = false;
+                    break;
+                }
+                stack.push(start++);
+                sb.append("+\n");
             }
         }
 
-        if (!isPossible) {
+        if (!isAble) {
             bw.write("NO\n");
         } else {
-            StringBuilder sb = new StringBuilder();
-            Stack<Integer> intStack = new Stack<>();
-            int start = 1;
-            int count = 0;
-
-            while (count < n) {
-                if (intStack.isEmpty()) {
-                    sb.append("+\n");
-                    intStack.push(start++);
-                    continue;
-                }
-
-                if (arr[count] == intStack.peek()) {
-                    sb.append("-\n");
-                    intStack.pop();
-                    count++;
-                } else {
-                    sb.append("+\n");
-                    intStack.push(start++);
-                }
-            }
-
-            bw.write(sb.toString());
+            bw.write(sb.toString() + "\n");
         }
-
         bw.flush();
         bw.close();
 
